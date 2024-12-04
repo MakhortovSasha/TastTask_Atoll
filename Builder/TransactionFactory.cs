@@ -16,5 +16,15 @@ namespace TestTask.Builder
             else
                 return new IncomeTransaction(date, amount);
         }
+
+        public static Transaction CreateTransaction(string type, DateTime date, decimal amount)
+        {
+            return type.ToLower() switch
+            {
+                "income" => new IncomeTransaction(date, amount),
+                "expense" => new ExpenseTransaction(date, amount),
+                _ => throw new ArgumentException("Unknown transaction type.")
+            };
+        }
     }
 }
